@@ -4,6 +4,7 @@ import Main from "./pages/Main/Main";
 import ItemDetail from "./pages/ItemDetail/ItemDetail";
 import ItemList from "./pages/ItemList/ItemList";
 import Cart from "./pages/Cart/Cart";
+import Reviews from './pages/Reviews/Reviews';
 
 class Routes extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class Routes extends React.Component {
           <Route exact path="/item-detail/:productId" component={ItemDetail} />
           <Route exact path="/item-list" component={ItemList} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/reviews" component={Reviews} />
         </Switch>
       </Router>
     );
