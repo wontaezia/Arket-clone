@@ -1,8 +1,10 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Main from './pages/Main/Main';
-import ItemDetail from './pages/ItemDetail/ItemDetail';
-import ItemList from './pages/ItemList/ItemList';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Main from "./pages/Main/Main";
+import ItemDetail from "./pages/ItemDetail/ItemDetail";
+import ItemList from "./pages/ItemList/ItemList";
+// import Cart from "./pages/Cart/Cart";
+
 class Routes extends React.Component {
   render() {
     return (
@@ -12,6 +14,7 @@ class Routes extends React.Component {
           <Route exact path="/item-detail" component={ItemDetail} />
           <Route exact path="/item-detail:productId" component={ItemDetail} />
           <Route exact path="/item-list" component={ItemList} />
+          {/* <Route exact path="/cart" component={Cart} /> */}
         </Switch>
       </Router>
     );
