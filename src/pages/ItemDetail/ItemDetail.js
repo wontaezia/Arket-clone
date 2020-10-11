@@ -9,6 +9,7 @@ import ProductDetail from "./components/ProductDetail";
 import ProductDescription from "./components/ProductDescription";
 import { BsArrowRightShort } from "react-icons/bs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { itemDetailAPI } from "../../config";
 import { cartAPI } from "../../config";
 
 export default function ItemDetail() {
@@ -31,34 +32,13 @@ export default function ItemDetail() {
       {
         Size: size,
         SoldOut: soldOut,
-        size_id:
-          (size === "S" && 1) ||
-          (size === "M" && 2) ||
-          (size === "L" && 3) ||
-          (size === "XL" && 4),
       },
       choiceStatus(soldOut)
     );
   };
 
-  const addToBag = () => {
-    fetchAdd();
-    const repeat = setInterval(() => {
-      viewStatus.current = !viewStatus.current;
-      countTimer.current += 1;
-      setTimer(countTimer.current);
-      setViewBag(viewStatus.current);
-
-      if (countTimer.current === 2) {
-        countTimer.current = 0;
-        setTimer(countTimer.current);
-        clearInterval(repeat);
-      }
-    }, 1000);
-  };
-
   const fetchItemDetail = async () => {
-    const result = await fetch("/Data/Item-Detail.json");
+    const result = await fetch(itemDetailAPI);
     const { data } = await result.json();
     setProduct(data);
   };
@@ -68,18 +48,32 @@ export default function ItemDetail() {
   }, []);
 
   const fetchAdd = async () => {
-    const addResult = fetch(cartAPI, {
-      method: "post",
-      headers: { Authorization: localStorage.getItem("token") },
-      body: JSON.stringify({
-        product_id: product.product.id,
-        count: "1",
-        size_id: size.size_id,
-      }),
-    });
     try {
-      const response = (await addResult).json();
-      const result = await response;
+      const addResult = await fetch(cartAPI, {
+        method: "post",
+        headers: { Authorization: localStorage.getItem("token") },
+        body: JSON.stringify({
+          product_id: product.product.id,
+          count: "1",
+          size: size.Size,
+        }),
+      });
+      const { message } = await addResult.json();
+
+      if (message === "SUCCESS") {
+        const repeat = setInterval(() => {
+          viewStatus.current = !viewStatus.current;
+          countTimer.current += 1;
+          setTimer(countTimer.current);
+          setViewBag(viewStatus.current);
+
+          if (countTimer.current === 2) {
+            countTimer.current = 0;
+            setTimer(countTimer.current);
+            clearInterval(repeat);
+          }
+        }, 2000);
+      }
     } catch {
       alert("Patch: 서버 연결 실패");
     }
@@ -147,7 +141,7 @@ export default function ItemDetail() {
           <ItemDetailInfoBox>
             <OrderContainer
               product={product}
-              addToBag={addToBag}
+              addToBag={fetchAdd}
               size={size}
               isSizeChoice={isSizeChoice}
               activeSize={activeSize}
@@ -200,7 +194,7 @@ const AddToBox = styled.div`
 
 const AddToContent = styled.div`
   display: flex;
-  transition: all 2s ease 0.1s;
+  transition: all 1s ease-in-out 0.5s;
   max-height: ${(props) =>
     props.viewBag ? "calc(100vh - 56px - 43px)" : "0px"};
   padding: 0 19px;
