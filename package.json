@@ -20,10 +20,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-slick": "^0.27.11",
-<<<<<<< HEAD
-=======
-    "react-tiny-popover": "^6.0.0-beta.2",
->>>>>>> c1ab2a4... Commit after 2nd mentor review
     "redux": "^4.0.5",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.0",
