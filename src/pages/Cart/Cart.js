@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CartItem from "./components/CartItem";
 import PriceContainer from "./components/PriceContainer";
+import Nav from "../../components/Nav";
 import { API } from "../../config";
 
 export default function Cart() {
@@ -13,14 +14,15 @@ export default function Cart() {
   }, []);
 
   const fetchCart = async () => {
-    // const result = await fetch(API/cart/cart, {
-    //   headers: { Authorization: localStorage.getItem("token") },
-    // });
-    const result = await fetch(`/Data/cart-Data.json`);
-    const {
-      data: { products },
-    } = await result.json();
-    setCart(products);
+    try {
+      const result = await fetch(`${API}/cart`, {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
+      const { data } = await result.json();
+      setCart(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -35,13 +37,15 @@ export default function Cart() {
 
   const deleteCart = (idx) => {
     const cartList = [...cart];
-    const updateItem = cartList.filter((item) => item.id !== cart[idx].id);
+    const updateItem = cartList.filter(
+      (item) => item.cart_id !== cart[idx].cart_id
+    );
     setCart(updateItem);
   };
 
   const fetchRemove = async (idx) => {
     try {
-      const deleteResult = await fetch(`${API}/cart/cart`, {
+      const deleteResult = await fetch(`${API}/cart`, {
         method: "delete",
         headers: { Authorization: localStorage.getItem("token") },
         body: JSON.stringify({
@@ -49,17 +53,17 @@ export default function Cart() {
         }),
       });
       const { message } = await deleteResult.json();
-      if (message === "바보가빈") {
+      if (message === "SUCCESS") {
         deleteCart(idx);
       }
     } catch (err) {
-      alert("백엔드에 ", err, "를 확인해보세요.");
+      console.log(err);
     }
   };
 
   const fetchCount = async (idx, cartList) => {
     try {
-      const patchResult = await fetch(`${API}/cart/cart`, {
+      const patchResult = await fetch(`${API}/cart`, {
         method: "patch",
         headers: { Authorization: localStorage.getItem("token") },
         body: JSON.stringify({
@@ -69,11 +73,11 @@ export default function Cart() {
       });
 
       const { message } = await patchResult.json();
-      if (message === "바보종일") {
+      if (message === "SUCCESS") {
         setCart(cartList);
       }
     } catch (err) {
-      alert("백엔드에 " + err + "를 확인해보세요.");
+      console.log(err);
     }
   };
 
@@ -93,9 +97,7 @@ export default function Cart() {
 
   return (
     <>
-      <Nav>
-        <span>진희 Nav</span>
-      </Nav>
+      <Nav />
       <Section>
         <CartContainer>
           <h2>Shopping bag</h2>
@@ -108,6 +110,7 @@ export default function Cart() {
                 item={item}
                 changeCount={changeCount}
                 deleteCart={deleteCart}
+                fetchRemove={fetchRemove}
               />
             );
           })}
@@ -117,18 +120,6 @@ export default function Cart() {
     </>
   );
 }
-
-const Nav = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  background-color: yellow;
-  text-align: center;
-  span {
-    font-size: 40px;
-  }
-`;
 
 const Section = styled.section`
   display: flex;

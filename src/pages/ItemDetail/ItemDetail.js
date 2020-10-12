@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import OrderContainer from "./components/OrderContainer";
 import ProductDetail from "./components/ProductDetail";
 import ProductDescription from "./components/ProductDescription";
+import Nav from "../../components/Nav";
 import { baekAPI } from "../../config";
 import { API } from "../../config";
 import { BsArrowRightShort } from "react-icons/bs";
@@ -52,7 +53,7 @@ export default function ItemDetail() {
 
   const fetchAdd = async () => {
     try {
-      const addResult = await fetch(`${API}/cart/cart`, {
+      const addResult = await fetch(`${API}/cart`, {
         method: "post",
         headers: { Authorization: localStorage.getItem("token") },
         body: JSON.stringify({
@@ -84,9 +85,7 @@ export default function ItemDetail() {
 
   return (
     <>
-      <Nav>
-        <span>김진희의 Nav</span>
-      </Nav>
+      <Nav />
       <Section>
         <AddToBox>
           <AddToContent viewBag={viewBag}>
@@ -163,18 +162,6 @@ export default function ItemDetail() {
     </>
   );
 }
-
-const Nav = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  background-color: yellow;
-  text-align: center;
-  span {
-    font-size: 40px;
-  }
-`;
 
 const Section = styled.section`
   margin: 0 auto;

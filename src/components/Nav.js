@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import Login from '../components/Login';
-import { GrSearch } from 'react-icons/gr';
-import { VscAccount } from 'react-icons/vsc';
-import { BsQuestionCircle } from 'react-icons/bs';
-import { BsBag } from 'react-icons/bs';
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
+import Login from "../components/Login";
+import { GrSearch } from "react-icons/gr";
+import { VscAccount } from "react-icons/vsc";
+import { BsQuestionCircle } from "react-icons/bs";
+import { BsBag } from "react-icons/bs";
 
-import MenuContainer from './MenuContainer';
+import MenuContainer from "./MenuContainer";
 
 const Nav = () => {
   const [currentMenu, setCurrentMenu] = useState(false);
@@ -73,13 +73,13 @@ const Nav = () => {
           </InternationalButton>
         </QuestionBottom>
       </QuestionBox>
-      <Test
+      {/* <Test
         onClick={() => {
           setCurrentMenu(false);
           setTool(false);
           setAccount(false);
         }}
-      ></Test>
+      ></Test> */}
     </>
   );
 };
@@ -130,7 +130,7 @@ const AboutBox = styled.div`
   text-align: center;
 `;
 const QuestionBox = styled.div`
-  display: ${({ tool }) => (tool ? 'flex' : 'none')};
+  display: ${({ tool }) => (tool ? "flex" : "none")};
   flex-direction: column;
   position: absolute;
   right: 30px;
@@ -198,6 +198,7 @@ const Button = styled.button`
 `;
 
 const Test = styled.div`
+  position: absolute;
   width: 100%;
   height: 1000px;
 `;

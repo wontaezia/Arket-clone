@@ -6,8 +6,8 @@ export default function CartItems({
   cart,
   item,
   idx,
-  deleteCart,
   changeCount,
+  fetchRemove,
 }) {
   const [isHover, setIsHover] = useState(false);
   const onMouseOver = () => setIsHover(!isHover);
@@ -26,7 +26,7 @@ export default function CartItems({
     >
       <CartImgBox>
         <span>
-          <RemoveBox onClick={() => deleteCart(idx)}>
+          <RemoveBox onClick={() => fetchRemove(idx)}>
             <span>X</span>
           </RemoveBox>
         </span>
