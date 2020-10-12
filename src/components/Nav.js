@@ -73,13 +73,6 @@ const Nav = () => {
           </InternationalButton>
         </QuestionBottom>
       </QuestionBox>
-      {/* <Test
-        onClick={() => {
-          setCurrentMenu(false);
-          setTool(false);
-          setAccount(false);
-        }}
-      ></Test> */}
     </>
   );
 };
@@ -195,12 +188,6 @@ const Button = styled.button`
   &:hover {
     opacity: 0.5;
   }
-`;
-
-const Test = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 1000px;
 `;
 
 export default Nav;

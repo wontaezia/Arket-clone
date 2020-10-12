@@ -1,5 +1,5 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { FilterSections } from "./FilterSections";
 import { ColorFilter } from "./ColorFilter";
 import { MaterialFilter } from "./MaterialFilter";
@@ -7,21 +7,36 @@ import { FilterClearBtn } from "./FilterClearBtn";
 import { FilterOkBtn } from "./FilterOkBtn";
 
 export const FilterList = (props) => {
-  const { updateItems } = props;
+  const {
+    updateItems,
+    closePopover,
+    colorFilter,
+    setColorFilter,
+    materialFilter,
+    setMaterialFilter,
+  } = props;
 
   return (
     <div className="Filter">
       <FilterSections type="Color">
-        <ColorFilter updateItems={updateItems} />
+        <ColorFilter
+          updateItems={updateItems}
+          colorFilter={colorFilter}
+          setColorFilter={setColorFilter}
+        />
       </FilterSections>
       <FilterSections type="Material">
-        <MaterialFilter updateItems={updateItems} />
+        <MaterialFilter
+          updateItems={updateItems}
+          materialFilter={materialFilter}
+          setMaterialFilter={setMaterialFilter}
+        />
       </FilterSections>
       <FilterBtn>
-        <FilterClearBtn updateItems={updateItems}/>
-        <FilterOkBtn />
+        <FilterClearBtn updateItems={updateItems} setColorFilter={setColorFilter} setMaterialFilter={setMaterialFilter}
+/>
+        <FilterOkBtn closePopover={closePopover} />
       </FilterBtn>
-      
     </div>
   );
 };

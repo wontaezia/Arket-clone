@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
-import { BsCheckBox } from 'react-icons/bs';
-import { RiKakaoTalkFill } from 'react-icons/ri';
-import URL from '../url';
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+import { BsCheckBox } from "react-icons/bs";
+import { RiKakaoTalkFill } from "react-icons/ri";
+import URL from "../url";
 
 export default function Login({ account }) {
   const [inputs, setInputs] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const onChange = (e) => {
@@ -20,8 +20,8 @@ export default function Login({ account }) {
   };
 
   const fetchLogin = async () => {
-    const result = fetch(URL + 'user/signin', {
-      method: 'post',
+    const result = fetch(URL + "user/signin", {
+      method: "post",
       body: JSON.stringify({
         email: inputs.email,
         password: inputs.password,
@@ -34,7 +34,7 @@ export default function Login({ account }) {
 
   const clickLogin = (event) => {
     event.preventDefault();
-    console.log('로그인버튼');
+    console.log("로그인버튼");
     fetchLogin();
   };
 
@@ -74,7 +74,7 @@ export default function Login({ account }) {
               <ShowButton
                 on
                 type="button"
-                class="a-button-nostyle toggle-password-state password-visible"
+                className="a-button-nostyle toggle-password-state password-visible"
                 data-show-text="Show"
                 data-hide-text="Hide"
               >
@@ -82,14 +82,14 @@ export default function Login({ account }) {
               </ShowButton>
             </PasswordBox>
             <CheckBoxInput>
-              <BsCheckBox style={{ marginRight: '10' }} />
+              <BsCheckBox style={{ marginRight: "10" }} />
               Keep me signed in
             </CheckBoxInput>
             <ContinueButton onClick={clickLogin}>
               <span>Continue</span>
             </ContinueButton>
             <KakaoButton type="submit">
-              <RiKakaoTalkFill style={{ marginRight: '5' }} />
+              <RiKakaoTalkFill style={{ marginRight: "5" }} />
               <span>KakaoTalk Login</span>
             </KakaoButton>
             <ResetPasswordBox>
@@ -109,7 +109,7 @@ const LoginForm = styled.form`
 const SignInBox = styled.div`
   ${(props) => props}
   position: absolute;
-  display: ${({ account }) => (account ? 'flex' : 'none')};
+  display: ${({ account }) => (account ? "flex" : "none")};
   width: 350px;
   right: 64px;
   top: 62px;

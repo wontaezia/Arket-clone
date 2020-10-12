@@ -1,20 +1,9 @@
-import React, { useState } from 'react'
-import Popover from 'react-popover';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-export const FilterOkBtn = (closePopover) => {
-    const [popover, setPopover] = useState(false);
-
-    return (
-    <>
-        <OkButton>
-        <Popover onClick={() => setPopover(!popover)}>
-            OK
-        </Popover>
-      </OkButton>
-    </>
-    )
-}
+export const FilterOkBtn = ({ closePopover }) => {
+  return <OkButton onClick={closePopover}>OK</OkButton>;
+};
 
 const OkButton = styled.button`
   width: 100px;

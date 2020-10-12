@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import styled from 'styled-components';
-import { API } from '../../../config';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-export const FilterClearBtn = ({ updateItems }) => {
 
-    return (
-            <ClearButton
-            onClick = {() => axios.get(`${API}/products`).then((res) => updateItems(res.data.data))}> CLEAR
-                </ClearButton> 
 
-    )
-}
+
+export const FilterClearBtn = ({ updateItems, colorFilter, setColorFilter, materialFilter, setMaterialFilter}) => {
+ 
+ const clearBtn = () => {
+  setColorFilter(!colorFilter); setMaterialFilter(!materialFilter);
+ }
+  return (
+    <ClearButton
+      onClick={clearBtn}
+    >
+      {" "}
+      CLEAR
+    </ClearButton>
+  );
+};
 
 const ClearButton = styled.button`
   width: 100px;
