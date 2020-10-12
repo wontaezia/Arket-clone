@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CartItem from "./components/CartItem";
 import PriceContainer from "./components/PriceContainer";
-import { cartAPI } from "../../config";
+import { API } from "../../config";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
@@ -13,7 +13,7 @@ export default function Cart() {
   }, []);
 
   const fetchCart = async () => {
-    // const result = await fetch(cartAPI, {
+    // const result = await fetch(API/cart/cart, {
     //   headers: { Authorization: localStorage.getItem("token") },
     // });
     const result = await fetch(`/Data/cart-Data.json`);
@@ -41,7 +41,7 @@ export default function Cart() {
 
   const fetchRemove = async (idx) => {
     try {
-      const deleteResult = await fetch(cartAPI, {
+      const deleteResult = await fetch(`${API}/cart/cart`, {
         method: "delete",
         headers: { Authorization: localStorage.getItem("token") },
         body: JSON.stringify({
@@ -59,7 +59,7 @@ export default function Cart() {
 
   const fetchCount = async (idx, cartList) => {
     try {
-      const patchResult = await fetch(cartAPI, {
+      const patchResult = await fetch(`${API}/cart/cart`, {
         method: "patch",
         headers: { Authorization: localStorage.getItem("token") },
         body: JSON.stringify({
@@ -69,7 +69,7 @@ export default function Cart() {
       });
 
       const { message } = await patchResult.json();
-      if (message === "갓가빈") {
+      if (message === "바보종일") {
         setCart(cartList);
       }
     } catch (err) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -7,10 +7,10 @@ import "slick-carousel/slick/slick-theme.css";
 import OrderContainer from "./components/OrderContainer";
 import ProductDetail from "./components/ProductDetail";
 import ProductDescription from "./components/ProductDescription";
+import { baekAPI } from "../../config";
+import { API } from "../../config";
 import { BsArrowRightShort } from "react-icons/bs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { itemDetailAPI } from "../../config";
-import { cartAPI } from "../../config";
 
 export default function ItemDetail() {
   const [product, setProduct] = useState();
@@ -26,36 +26,39 @@ export default function ItemDetail() {
     setIsSoldOut(soldOut);
   };
 
-  const isSizeChoice = (size, soldOut, choice) => {
+  const isSizeChoice = (size, soldOut, ProductSize) => {
     setActiveSize(size);
     setSize(
       {
         Size: size,
         SoldOut: soldOut,
+        product_size_id: ProductSize,
       },
       choiceStatus(soldOut)
     );
   };
 
-  const fetchItemDetail = async () => {
-    const result = await fetch(itemDetailAPI);
+  const { productId } = useParams();
+
+  const fetchItemDetail = async (productId) => {
+    const result = await fetch(`${baekAPI}/products/${productId}`);
     const { data } = await result.json();
     setProduct(data);
   };
 
   useEffect(() => {
-    fetchItemDetail();
-  }, []);
+    fetchItemDetail(productId);
+  }, [productId]);
 
   const fetchAdd = async () => {
     try {
-      const addResult = await fetch(cartAPI, {
+      const addResult = await fetch(`${API}/cart/cart`, {
         method: "post",
         headers: { Authorization: localStorage.getItem("token") },
         body: JSON.stringify({
           product_id: product.product.id,
           count: "1",
-          size: size.Size,
+          product_size_id: size.product_size_id,
         }),
       });
       const { message } = await addResult.json();
@@ -74,8 +77,8 @@ export default function ItemDetail() {
           }
         }, 2000);
       }
-    } catch {
-      alert("Patch: 서버 연결 실패");
+    } catch (err) {
+      console.log(err);
     }
   };
 

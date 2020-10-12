@@ -34,14 +34,18 @@ export default function ItemDetail({
             return item.SoldOut === "true" ? (
               <SizeSoldOut
                 key={i}
-                onClick={() => isSizeChoice(item.Size, item.SoldOut)}
+                onClick={() =>
+                  isSizeChoice(item.Size, item.SoldOut, item.ProductSize)
+                }
               >
                 <span>{item.Size}</span>
               </SizeSoldOut>
             ) : (
               <SizeChoice
                 key={i}
-                onClick={() => isSizeChoice(item.Size, item.SoldOut)}
+                onClick={() =>
+                  isSizeChoice(item.Size, item.SoldOut, item.ProductSize)
+                }
                 size={size}
                 style={{
                   backgroundColor: activeSize === item.Size ? "black" : "white",
