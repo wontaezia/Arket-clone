@@ -98,7 +98,9 @@ export default function ItemDetail() {
                 <span>{product?.product.Title}</span>
                 <span>$ {product?.product.Price}</span>
               </AddToTitle>
-              <ViewBagBtn>View bag</ViewBagBtn>
+              <Link to="/cart">
+                <ViewBagBtn>View bag</ViewBagBtn>
+              </Link>
             </div>
           </AddToContent>
         </AddToBox>
