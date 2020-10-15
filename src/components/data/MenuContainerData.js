@@ -5,7 +5,7 @@ const mainData = [
   'HOMEWARE',
   'BABY',
   'SALE',
-  'REVIEW',
+  'REVIEWS',
 ];
 
 const subBarData = [

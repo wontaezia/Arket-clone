@@ -1,27 +1,33 @@
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
-import Login from "../components/Login";
-import { GrSearch } from "react-icons/gr";
-import { VscAccount } from "react-icons/vsc";
-import { BsQuestionCircle } from "react-icons/bs";
-import { BsBag } from "react-icons/bs";
-
-import MenuContainer from "./MenuContainer";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Login from '../components/Login';
+import { GrSearch } from 'react-icons/gr';
+import { VscAccount } from 'react-icons/vsc';
+import { BsQuestionCircle } from 'react-icons/bs';
+import { BsBag } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import MenuContainer from './MenuContainer';
 
 const Nav = () => {
-  const [currentMenu, setCurrentMenu] = useState(false);
-  const [tool, setTool] = useState(false);
-  const [account, setAccount] = useState(false);
-  const openMenu = (menu) => {
-    setCurrentMenu(true);
+  const login = useSelector((state) => state.login);
+  const { totalCount } = useSelector((state) => state.cart);
+
+  const [option, setOption] = useState(new Array(3).fill(false));
+  const openMenu = () => {
+    setOption([true, false, false]);
   };
   return (
     <>
       <NavBox>
         <Container>
-          <Logo href="http://localhost:3000/">ARDOG</Logo>
+          <Link to="/">ARDOG</Link>
           <NavBar>
-            <MenuContainer currentMenu={currentMenu} openMenu={openMenu} />
+            <MenuContainer
+              option={option}
+              onClick={openMenu}
+              openMenu={openMenu}
+            />
           </NavBar>
         </Container>
         <Icons>
@@ -29,18 +35,23 @@ const Nav = () => {
             <GrSearch />
           </Button>
           <Button>
-            <VscAccount onClick={() => setAccount(!account)} />
+            <VscAccount onClick={() => setOption([false, !option[1], false])} />
           </Button>
           <Button>
-            <BsQuestionCircle onClick={() => setTool(!tool)} />
+            <BsQuestionCircle
+              onClick={() => setOption([false, false, !option[2]])}
+            />
           </Button>
           <Button>
-            <BsBag />
+            <BsBag></BsBag>
+            <CartBox>
+              <CartNum>{totalCount}</CartNum>
+            </CartBox>
           </Button>
         </Icons>
       </NavBox>
-      <Login account={account} />
-      <QuestionBox tool={tool}>
+      {!login && <Login option={option} setOption={setOption} />}
+      <QuestionBox option={option}>
         <AboutWrap>
           <AboutBox>
             <About src="/Images/tag.png" alt="About ARKET" />
@@ -73,6 +84,11 @@ const Nav = () => {
           </InternationalButton>
         </QuestionBottom>
       </QuestionBox>
+      <EmptyBox
+        onClick={() => {
+          setOption([false, false, false]);
+        }}
+      />
     </>
   );
 };
@@ -83,6 +99,12 @@ const Container = styled.div`
   height: 25px;
   margin-top: 5px;
   margin-right: 0px;
+  a {
+    font-size: 27px;
+    margin-top: 31px;
+    width: 90px;
+    cursor: pointer;
+  }
 `;
 
 const NavBox = styled.div`
@@ -91,13 +113,6 @@ const NavBox = styled.div`
   height: 56px;
   margin-left: 20px;
   border-bottom: 2.5px solid black;
-`;
-
-const Logo = styled.a`
-  font-size: 27px;
-  margin-top: 31px;
-  width: 90px;
-  cursor: pointer;
 `;
 
 const NavBar = styled.div`
@@ -114,7 +129,6 @@ const Icons = styled.div`
   justify-content: flex-end;
   width: auto;
   height: auto;
-  margin-right: 25px;
 `;
 
 const AboutBox = styled.div`
@@ -123,7 +137,8 @@ const AboutBox = styled.div`
   text-align: center;
 `;
 const QuestionBox = styled.div`
-  display: ${({ tool }) => (tool ? "flex" : "none")};
+  z-index: 10;
+  display: ${({ option }) => (option[2] ? 'flex' : 'none')};
   flex-direction: column;
   position: absolute;
   right: 30px;
@@ -190,4 +205,28 @@ const Button = styled.button`
   }
 `;
 
+const EmptyBox = styled.div`
+  position: absolute;
+  width: 100%;
+  height: ${({ option }) =>
+    option === [false, false, false] ? '0px' : '960px'};
+`;
+
+const CartBox = styled.div`
+  position: relative;
+  top: 3px;
+  left: -50%;
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+`;
+
+const CartNum = styled.span`
+  position: absolute;
+  display: block;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 export default Nav;

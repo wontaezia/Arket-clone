@@ -109,7 +109,7 @@ const Upcycled = styled.div`
   height: 100vh;
   max-height: 900px;
   overflow: hidden;
-  z-index: 1;
+  z-index: 0;
 
   &::before {
     content: '';

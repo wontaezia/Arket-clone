@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
-import styled from "styled-components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import OrderContainer from "./components/OrderContainer";
-import ProductDetail from "./components/ProductDetail";
-import ProductDescription from "./components/ProductDescription";
-import Nav from "../../components/Nav";
-import { baekAPI } from "../../config";
-import { API } from "../../config";
-import { BsArrowRightShort } from "react-icons/bs";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import OrderContainer from './components/OrderContainer';
+import ProductDetail from './components/ProductDetail';
+import ProductDescription from './components/ProductDescription';
+import Nav from '../../components/Nav';
+import { baekAPI } from '../../config';
+import { API } from '../../config';
+import { BsArrowRightShort } from 'react-icons/bs';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 export default function ItemDetail() {
   const [product, setProduct] = useState();
   const [size, setSize] = useState({ none: null });
-  const [activeSize, setActiveSize] = useState("");
+  const [activeSize, setActiveSize] = useState('');
   const [isSoldOut, setIsSoldOut] = useState(false);
   const [viewBag, setViewBag] = useState(false);
   const [timer, setTimer] = useState(0);
@@ -44,6 +44,7 @@ export default function ItemDetail() {
   const fetchItemDetail = async (productId) => {
     const result = await fetch(`${baekAPI}/products/${productId}`);
     const { data } = await result.json();
+
     setProduct(data);
   };
 
@@ -54,23 +55,21 @@ export default function ItemDetail() {
   const fetchAdd = async () => {
     try {
       const addResult = await fetch(`${API}/cart`, {
-        method: "post",
-        headers: { Authorization: localStorage.getItem("token") },
+        method: 'post',
+        headers: { Authorization: localStorage.getItem('token') },
         body: JSON.stringify({
           product_id: product.product.id,
-          count: "1",
+          count: '1',
           product_size_id: size.product_size_id,
         }),
       });
       const { message } = await addResult.json();
-
-      if (message === "SUCCESS") {
+      if (message === 'SUCCESS') {
         const repeat = setInterval(() => {
           viewStatus.current = !viewStatus.current;
           countTimer.current += 1;
           setTimer(countTimer.current);
           setViewBag(viewStatus.current);
-
           if (countTimer.current === 2) {
             countTimer.current = 0;
             setTimer(countTimer.current);
@@ -188,7 +187,7 @@ const AddToContent = styled.div`
   display: flex;
   transition: all 1s ease-in-out 0.5s;
   max-height: ${(props) =>
-    props.viewBag ? "calc(100vh - 56px - 43px)" : "0px"};
+    props.viewBag ? 'calc(100vh - 56px - 43px)' : '0px'};
   padding: 0 19px;
 `;
 
@@ -300,7 +299,7 @@ const ItemColors = styled.div`
 const ItemColorImg = styled.img`
   width: 49px;
   height: 65px;
-  src: "/Images/test_jean.jpg";
+  src: '/Images/test_jean.jpg';
 `;
 
 const ItemMaterials = styled.div`
@@ -378,7 +377,7 @@ const StyledSlider = styled(Slider)`
 function ArrowText() {
   return (
     <BsArrowRightShort
-      style={{ verticalAlign: "text-top", marginLeft: "3px" }}
+      style={{ verticalAlign: 'text-top', marginLeft: '3px' }}
     />
   );
 }
@@ -386,7 +385,7 @@ function ArrowText() {
 function PrevBtn(props) {
   const { style, onClick } = props;
   return (
-    <ArrowBox style={{ ...style, display: "block" }} onClick={onClick}>
+    <ArrowBox style={{ ...style, display: 'block' }} onClick={onClick}>
       <IoIosArrowBack to="prev" />
     </ArrowBox>
   );
@@ -395,7 +394,7 @@ function PrevBtn(props) {
 function NextBtn(props) {
   const { style, onClick } = props;
   return (
-    <ArrowBox style={{ ...style, display: "block" }} onClick={onClick}>
+    <ArrowBox style={{ ...style, display: 'block' }} onClick={onClick}>
       <IoIosArrowForward to="next" />
     </ArrowBox>
   );

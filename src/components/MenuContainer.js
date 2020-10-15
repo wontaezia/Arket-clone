@@ -5,8 +5,7 @@ import { BiPlusCircle } from 'react-icons/bi';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import Data from './data/MenuContainerData';
 
-function MenuContainer({ currentMenu, openMenu, history }) {
-  const [active, setActive] = useState(false);
+function MenuContainer({ currentMenu, openMenu, history, option }) {
   const [currentMain, setCurrentMain] = useState(0);
   const [currentCategory, setCurrentCategory] = useState(0);
   const [currentIcon, setCurrentIcon] = useState('');
@@ -16,38 +15,36 @@ function MenuContainer({ currentMenu, openMenu, history }) {
     setCurrentIcon(index);
   };
 
+  const handleCategories = (menu, index) => {
+    menu !== 'REVIEWS' && setCurrentMain(index);
+    menu !== 'REVIEWS' && openMenu(menu);
+    menu !== 'REVIEWS' && setOpen(!open);
+    menu === 'REVIEWS' && history.push('/reviews');
+  };
+
   return (
     <Nav>
       <NavBar>
         <MainCategories>
           {Data.mainData.map((menu, index) => {
             return (
-              <li
-                onClick={() => {
-                  menu !== 'REVIEW' && setCurrentMain(index);
-                  menu !== 'REVIEW' && setActive(true);
-                  menu !== 'REVIEW' && openMenu(menu);
-                  menu !== 'REVIEW' && setOpen(!open);
-                  menu === 'REVIEW' && history.push('/review');
-                }}
-                key={menu}
-              >
+              <li key={menu} onClick={() => handleCategories(menu, index)}>
                 {menu}
               </li>
             );
           })}
         </MainCategories>
       </NavBar>
-      <MenuBox currentMenu={currentMenu}>
+      <MenuBox currentMenu={currentMenu} option={option}>
         <Categories>
-          {Data?.categoriesData[currentMain].map((menu, index) => {
+          {Data?.categoriesData[currentMain]?.map((menu, index) => {
             return (
               <li
+                key={index}
                 onClick={() => {
                   setCurrentCategory(index);
                   iconChange(index);
                 }}
-                key={index}
                 style={{ color: menu === 'SALE' && 'red' }}
               >
                 {menu}
@@ -68,18 +65,29 @@ function MenuContainer({ currentMenu, openMenu, history }) {
         </Categories>
         <SubCategoriesBox>
           <SubCategoriesTitle>
-            {Data?.subCategoriesData[currentMain][currentCategory][0]}
+            {Data.subCategoriesData[currentMain][currentCategory]?.[0]}
           </SubCategoriesTitle>
           <SubCategories>
-            {Data?.subCategoriesData[currentMain][currentCategory].map(
+            {Data.subCategoriesData[currentMain][currentCategory]?.map(
               (menu, i) => {
-                return i === 0 ? '' : <li key={menu}>{menu}</li>;
+                return i === 0 ? (
+                  ''
+                ) : (
+                  <li
+                    onClick={() => {
+                      menu === 'All clothing' && history.push('/item-list');
+                    }}
+                    onkey={menu}
+                  >
+                    {menu}
+                  </li>
+                );
               }
             )}
           </SubCategories>
         </SubCategoriesBox>
         <SubBar>
-          <TrendingTitle>{Data?.subBarData[currentMain][0]}</TrendingTitle>
+          <TrendingTitle>{Data.subBarData[currentMain]?.[0]}</TrendingTitle>
           <TrendingContent>
             {Data?.subBarData[currentMain].map((menu, i) => {
               return <li key={menu}>{menu}</li>;
@@ -136,19 +144,18 @@ const MenuBox = styled.div`
   position: absolute;
   top: 56px;
   left: 0px;
-  width: 1777px;
-  height: ${(props) => (props.currentMenu ? '355px' : '0px')};
-  padding: ${(props) => (props.currentMenu ? '0px 20px' : '0px 20px')};
+  width: 100%;
+  height: ${({ option }) => (option[0] ? '355px' : '0px')};
+  padding: ${({ option }) => (option[0] ? '0px 20px' : '0px 20px')};
   text-overflow: hidden;
   overflow: hidden;
   white-space: nowrap;
   background-color: white;
   visibility: visible;
   opacity: 1;
+  z-index: 2;
   box-shadow: 0 17px 32px rgba(0, 0, 0, 0.2);
   transition: width 1s, height 1s, transform 2s;
-  &:hover {
-  }
 `;
 
 const Categories = styled.ul`
