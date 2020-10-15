@@ -10,7 +10,7 @@ export const ColorFilter = ({ updateItems, colorFilter, setColorFilter }) => {
         const id = `${COLOR_NAMES[color]}-checkbox`;
         return (
           <div key={id}>
-            <label htmlFor={id}>{COLOR_NAMES[color]}</label>
+            <ColorBoxWrapper>
             <input
               id={id}
               type="checkbox"
@@ -22,6 +22,8 @@ export const ColorFilter = ({ updateItems, colorFilter, setColorFilter }) => {
                 });
               }}
             /> 
+            </ColorBoxWrapper>
+           <label htmlFor={id}>{COLOR_NAMES[color]}</label>
           </div>
         );
       })}
@@ -31,4 +33,10 @@ export const ColorFilter = ({ updateItems, colorFilter, setColorFilter }) => {
 
 const ColorFilterContainer = styled.section`
   padding: 10px;
+  font-size: 15px;
+  `;
+
+const ColorBoxWrapper = styled.section`
+  margin-right: 15px;
+  display: inline;
 `;

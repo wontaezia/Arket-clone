@@ -13,18 +13,20 @@ export const MaterialFilter = ({
         const id = `${MATERIAL_NAMES[material]}-checkbox`;
         return (
           <div key={id}>
+            <MaterialBoxWrapper>
+              <input
+                id={id}
+                type="checkbox"
+                checked={materialFilter[material]}
+                onClick={(event) => {
+                  setMaterialFilter({
+                    ...materialFilter,
+                    [material]: event.target.checked,
+                  });
+                }}
+              />
+            </MaterialBoxWrapper>
             <label htmlFor={id}>{MATERIAL_NAMES[material]}</label>
-            <input
-              id={id}
-              type="checkbox"
-              checked={materialFilter[material]}
-              onClick={(event) => {
-                setMaterialFilter({
-                  ...materialFilter,
-                  [material]: event.target.checked,
-                });
-              }}
-            />
           </div>
         );
       })}
@@ -34,4 +36,11 @@ export const MaterialFilter = ({
 
 const MaterialFilterContainer = styled.section`
   padding: 10px;
+  font-size: 15px;
 `;
+
+const MaterialBoxWrapper = styled.section`
+  margin-right: 15px;
+  display: inline;
+`;
+

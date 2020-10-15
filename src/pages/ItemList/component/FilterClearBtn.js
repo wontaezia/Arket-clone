@@ -4,10 +4,10 @@ import styled from "styled-components";
 
 
 
-export const FilterClearBtn = ({ updateItems, colorFilter, setColorFilter, materialFilter, setMaterialFilter}) => {
+export const FilterClearBtn = ({ updateItems, colorFilter, setColorFilter, materialFilter, setMaterialFilter, categoryFilter, setCategoryFilter}) => {
  
  const clearBtn = () => {
-  setColorFilter(!colorFilter); setMaterialFilter(!materialFilter);
+  setColorFilter(!colorFilter); setMaterialFilter(!materialFilter); setCategoryFilter(categoryFilter);
  }
   return (
     <ClearButton

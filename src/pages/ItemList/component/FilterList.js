@@ -14,6 +14,8 @@ export const FilterList = (props) => {
     setColorFilter,
     materialFilter,
     setMaterialFilter,
+    setCategoryFilter,
+    listData,
   } = props;
 
   return (
@@ -34,7 +36,7 @@ export const FilterList = (props) => {
       </FilterSections>
       <FilterBtn>
         <FilterClearBtn updateItems={updateItems} setColorFilter={setColorFilter} setMaterialFilter={setMaterialFilter}
-/>
+setCategoryFilter={setCategoryFilter}/>
         <FilterOkBtn closePopover={closePopover} />
       </FilterBtn>
     </div>

@@ -4,7 +4,7 @@ import SimpleSlider from "./component/SimpleSlider";
 import Popover from "react-popover";
 import styled from "styled-components";
 import { API } from "../../config";
-// import { FilterCount } from './component/FilterCount';
+import { FilterCount } from './component/FilterCount';
 import { ItemsData } from "./component/ItemsData";
 import { FilterList } from "./component/FilterList";
 import { DEFAULT_COLORS, DEFAULT_MATERIALS } from "./constants";
@@ -32,7 +32,7 @@ export default function ItemList(props) {
     const materialQuery = selectedMaterials.map((el) => "&material=" + el);
 
     const combinedQuery = colorQuery + materialQuery + categoryFilter;
-    console.log(combinedQuery)
+    console.log(combinedQuery.length)
     axios
       .get(`${API}/products?${combinedQuery.split(",").join("")}`)
       .then((res) => setListData(res.data.data));
@@ -46,7 +46,7 @@ export default function ItemList(props) {
         setCategoryFilter={setCategoryFilter}
       />
       <FilterContainer>
-        {/* <FilterCount /> */}
+        <FilterCount listData={listData}  setCategoryFilter={setCategoryFilter}/>
         <Popover
           isOpen={popover}
           place="below"
@@ -58,6 +58,7 @@ export default function ItemList(props) {
               setColorFilter={setColorFilter}
               materialFilter={materialFilter}
               setMaterialFilter={setMaterialFilter}
+              setCategoryFilter={setCategoryFilter}
             />
           }
         >
