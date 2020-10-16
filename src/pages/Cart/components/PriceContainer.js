@@ -67,6 +67,7 @@ const DiscountBox = styled.div`
   &:hover {
     opacity: 1;
   }
+  
   span {
     font-size: 13px;
   }

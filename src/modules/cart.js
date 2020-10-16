@@ -45,6 +45,50 @@ const initialState = {
   items: [],
 };
 
+const cart = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case ADD_TO_CART:
+      return updateItems(state, payload)
+    case REMOVE_ITEM:
+      return updateItems(state, payload)
+    case RESET_CART_LIST:
+      return {
+        ...state,
+        totalPrice: 0,
+        totalCount: 0,
+        items: [],
+      };
+    case INCREASE_COUNT:
+      return updateItems(state, payload)
+    case DECREASE_COUNT:
+      return updateItems(state, payload)
+    case GET_ITEMS:
+      return updateItems(state, payload)
+    default:
+      return state;
+  }
+};
+
+const updateItems = (state, payload) => {
+  const { items } = state;
+  const isArray = Array.isArray(payload)
+
+  return isArray ? {
+      ...state,
+      items: [...payload],
+      totalCount: payload.reduce((acc, { count }) => acc + count, 0),
+      totalPrice: payload.reduce(
+        (acc, { count, price }) => acc + count * price,
+        0
+      ),
+    }
+    : {
+      ...state,
+      items: checkCartItems(items, payload),
+      totalCount: state.totalCount + 1    
+    } 
+}
+
 const checkCartItems = (items, payload) => {
   const isAddedToCart = items.find((item) => item.id === payload.id);
   const AddedItem = (item) =>
@@ -53,53 +97,4 @@ const checkCartItems = (items, payload) => {
   return isAddedToCart ? items.map(AddedItem) : [...items, payload];
 };
 
-const cart = (state = initialState, action) => {
-  const { items } = state;
-  const { type, payload } = action;
-
-  switch (type) {
-    case ADD_TO_CART:
-      return {
-        ...state,
-        items: checkCartItems(items, payload),
-      };
-    case REMOVE_ITEM:
-      return {
-        ...state,
-        items: [...payload],
-      };
-    case RESET_CART_LIST:
-      return {
-        ...state,
-        totalCount: 0,
-        items: [],
-      };
-    case INCREASE_COUNT:
-      return {
-        ...state,
-        items: [...payload],
-      };
-    case DECREASE_COUNT:
-      return {
-        ...state,
-        items: [...payload],
-      };
-    case SET_TOTAL:
-      return {
-        ...state,
-        totalCount: items.reduce((acc, { count }) => acc + count, 0),
-        totalPrice: items.reduce(
-          (acc, { count, price }) => acc + count * price,
-          0
-        ),
-      };
-    case GET_ITEMS:
-      return {
-        ...state,
-        items: [...payload],
-      };
-    default:
-      return state;
-  }
-};
 export default cart;

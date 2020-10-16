@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {useSelector} from 'react-redux'
 
 export default function ItemDetail({
   product,
@@ -8,10 +9,12 @@ export default function ItemDetail({
   isSizeChoice,
   activeSize,
   isSoldOut,
-  choiceStatus,
 }) {
+  const {login} = useSelector((state) => ({
+    login: state.login
+  }))
   return (
-    <OrderContainer>
+    <div>
       <ProductMaterials>
         <p>{product?.product.Material.Material_Name}</p>
       </ProductMaterials>
@@ -31,7 +34,7 @@ export default function ItemDetail({
         </SizeGuideBox>
         <SizeInfoBox>
           {product?.ProductSize.map((item, i) => {
-            return item.SoldOut === "true" ? (
+            return item.SoldOut === "true"? (
               <SizeSoldOut
                 key={i}
                 onClick={() =>
@@ -57,7 +60,7 @@ export default function ItemDetail({
             );
           })}
         </SizeInfoBox>
-        {isSoldOut === "true" ? (
+        {!login || isSoldOut === "true" ? (
           <DisalbedBtnBox>
             <span>ADD TO BAG</span>
           </DisalbedBtnBox>
@@ -66,16 +69,13 @@ export default function ItemDetail({
             <span>ADD TO BAG</span>
           </AddBtnBox>
         )}
-
         <ShippingInfo>
           <span>FREE SHIPPING ON ORDERS OVER 200 USD.</span>
         </ShippingInfo>
       </SizeContainer>
-    </OrderContainer>
+    </div>
   );
 }
-
-const OrderContainer = styled.div``;
 
 const ProductMaterials = styled.div`
   p {
@@ -93,6 +93,7 @@ const ProductInfo = styled.div`
 
 const ProducTitle = styled.div`
   display: inline-block;
+  
   h1 {
     max-width: 224px;
     font-size: 20px;
@@ -113,6 +114,7 @@ const SizeContainer = styled.div``;
 const SizeGuideBox = styled.div`
   padding-top: 10px;
   padding-bottom: 8px;
+
   span {
     font-size: 13px;
   }
@@ -156,6 +158,7 @@ const AddBtnBox = styled.button`
   background-color: black;
   margin-bottom: 15px;
   cursor: pointer;
+
   span {
     color: white;
   }
@@ -172,6 +175,7 @@ const DisalbedBtnBox = styled.button`
   margin-bottom: 15px;
   opacity: 0.7;
   cursor: pointer;
+
   span {
     color: white;
   }
@@ -185,6 +189,7 @@ const ShippingInfo = styled.div`
   text-align: center;
   padding-bottom: 15px;
   border-bottom: 1px solid #000;
+  
   span {
     font-size: 12px;
   }

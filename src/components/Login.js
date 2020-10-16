@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { BsCheckBox } from 'react-icons/bs';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import KaKaoLogin from 'react-kakao-login';
-import { API, baekAPI, kakaoKey } from '../config';
+import { API, kakaoKey } from '../config';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../modules/login';
 import { getItems } from '../modules/cart';
@@ -65,7 +65,7 @@ export default function Login({ option, setOption }) {
 
   const fetchKakao = async (response) => {
     try {
-      const result = await fetch(`${baekAPI}/user/kakaosignin`, {
+      const result = await fetch(`${API}/user/kakaosignin`, {
         method: 'POST',
         headers: {
           Authorization: response.access_token,

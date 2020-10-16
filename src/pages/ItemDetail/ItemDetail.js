@@ -1,19 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import OrderContainer from './components/OrderContainer';
-import ProductDetail from './components/ProductDetail';
-import ProductDescription from './components/ProductDescription';
-import Nav from '../../components/Nav';
-import { baekAPI } from '../../config';
-import { API } from '../../config';
-import { BsArrowRightShort } from 'react-icons/bs';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import styled from "styled-components";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import OrderContainer from "./components/OrderContainer";
+import ProductDetail from "./components/ProductDetail";
+import ProductDescription from "./components/ProductDescription";
+import Nav from "../../components/Nav";
+import { addToCart } from '../../modules/cart';
+import { API } from "../../config";
+import { BsArrowRightShort } from "react-icons/bs";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function ItemDetail() {
+  const dispatch = useDispatch();
   const [product, setProduct] = useState();
   const [size, setSize] = useState({ none: null });
   const [activeSize, setActiveSize] = useState('');
@@ -22,6 +24,7 @@ export default function ItemDetail() {
   const [timer, setTimer] = useState(0);
   const countTimer = useRef(timer);
   const viewStatus = useRef(false);
+  const { productId } = useParams();
 
   const choiceStatus = (soldOut) => {
     setIsSoldOut(soldOut);
@@ -39,10 +42,8 @@ export default function ItemDetail() {
     );
   };
 
-  const { productId } = useParams();
-
   const fetchItemDetail = async (productId) => {
-    const result = await fetch(`${baekAPI}/products/${productId}`);
+    const result = await fetch(`${API}/products/${productId}`);
     const { data } = await result.json();
 
     setProduct(data);
@@ -64,7 +65,9 @@ export default function ItemDetail() {
         }),
       });
       const { message } = await addResult.json();
-      if (message === 'SUCCESS') {
+
+      if (message === "SUCCESS") {
+        dispatch(addToCart(product))
         const repeat = setInterval(() => {
           viewStatus.current = !viewStatus.current;
           countTimer.current += 1;
@@ -122,7 +125,6 @@ export default function ItemDetail() {
                 <ColorItem product={product} />
               </ItemCategoryContainer>
             </ItemColors>
-
             <ItemMaterials>
               <ItemInfoCategory>MATERIALS</ItemInfoCategory>
               <ItemCategoryContainer>
@@ -149,7 +151,6 @@ export default function ItemDetail() {
               isSizeChoice={isSizeChoice}
               activeSize={activeSize}
               isSoldOut={isSoldOut}
-              choiceStatus={choiceStatus}
             />
             <ProductDetail
               product={product}
@@ -178,7 +179,6 @@ const AddToBox = styled.div`
   top: 62px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-
   overflow: hidden;
   text-overflow: hidden;
 `;
@@ -246,6 +246,7 @@ const ItemRoot = styled.div`
   height: 17px;
   text-overflow: hidden;
   white-space: nowrap;
+
   span {
     font-size: 14px;
   }
@@ -327,6 +328,7 @@ const ItemImgBox = styled.div`
 
 const ArrowBox = styled.button`
   cursor: pointer;
+
   svg {
     width: 49px;
     height: 92px;
@@ -369,6 +371,7 @@ const SETTINGS = {
 const StyledSlider = styled(Slider)`
   display: flex;
   align-items: center;
+
   .slick-list {
     width: 500px;
   }

@@ -9,7 +9,7 @@ export const logOut = () => ({
   type: LOGGED_OUT,
 });
 
-const initialState = false;
+const initialState = true;
 
 const login = (state = initialState, action) => {
   switch (action.type) {

@@ -113,7 +113,6 @@ export default function ItemDetail({ product, MaterialsItem, ColorItem }) {
           </div>
         </MadeBox>
       </MadeContainer>
-
       <CareContainer>
         <CareText onClick={() => onOptCheck(3)} data-name="care">
           <ProductDetailBox />
@@ -168,6 +167,7 @@ const DepartmentContainer = styled.div`
 const ProductContainer = styled.div`
   display: flex;
   padding: 5px 0px;
+  
   div {
     max-width: 68%;
   }
@@ -238,6 +238,7 @@ const ColorText = styled.div`
 
 const CareText = styled.div`
   width: 100%;
+
   &:hover {
     opacity: 0.5;
   }
@@ -245,6 +246,7 @@ const CareText = styled.div`
 
 const MadeText = styled.div`
   width: 100%;
+
   &:hover {
     opacity: 0.5;
   }

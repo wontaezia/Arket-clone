@@ -11,7 +11,6 @@ export default function CartItems({
 }) {
   const [isHover, setIsHover] = useState(false);
   const onMouseOver = () => setIsHover(!isHover);
-
   return (
     <CartItem
       key={idx}
@@ -30,7 +29,7 @@ export default function CartItems({
             <span>X</span>
           </RemoveBox>
         </span>
-        <CartImg src={item.main_image}></CartImg>
+        <CartImg src={item.main_image} />
       </CartImgBox>
       <CountBox>
         <div>

@@ -34,6 +34,7 @@ const ProductDescription = styled.div`
 const FullDescription = styled.div`
   margin: 30px 0px;
   line-height: 1.3em;
+
   p {
     font-size: 13px;
   }
@@ -41,6 +42,7 @@ const FullDescription = styled.div`
 
 const Description = styled.ul`
   margin: 10px 0px;
+  
   li {
     font-size: 13px;
     margin: 5px 0px;
