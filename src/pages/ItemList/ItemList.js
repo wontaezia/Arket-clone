@@ -18,6 +18,10 @@ export default function ItemList(props) {
   const [materialFilter, setMaterialFilter] = useState(DEFAULT_MATERIALS);
 
   useEffect(() => {
+    console.log(categoryFilter)
+  }, [categoryFilter])
+
+  useEffect(() => {
     axios.get(`${API}/products`).then((res) => setListData(res.data.data));
   }, []);
 
@@ -25,6 +29,7 @@ export default function ItemList(props) {
     const selectedColors = Object.keys(colorFilter).filter(
       (el) => !!colorFilter[el]
     );
+
     const colorQuery = selectedColors.map((el) => "&color=" + el);
     const selectedMaterials = Object.keys(materialFilter).filter(
       (el) => !!materialFilter[el]
@@ -32,7 +37,6 @@ export default function ItemList(props) {
     const materialQuery = selectedMaterials.map((el) => "&material=" + el);
 
     const combinedQuery = colorQuery + materialQuery + categoryFilter;
-    console.log(combinedQuery.length)
     axios
       .get(`${API}/products?${combinedQuery.split(",").join("")}`)
       .then((res) => setListData(res.data.data));
@@ -58,6 +62,7 @@ export default function ItemList(props) {
               setColorFilter={setColorFilter}
               materialFilter={materialFilter}
               setMaterialFilter={setMaterialFilter}
+              categoryFilter={categoryFilter}
               setCategoryFilter={setCategoryFilter}
             />
           }

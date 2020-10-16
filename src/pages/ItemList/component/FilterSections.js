@@ -14,7 +14,7 @@ export const FilterSections = ({ children, type }) => {
 };
 
 const FilterSectionsWrapper = styled.section`
-  width: 200px;
+  width: 350px;
   border: 1px solid black;
   padding: 10px;
   background: white;
