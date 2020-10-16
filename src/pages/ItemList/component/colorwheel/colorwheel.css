@@ -1,0 +1,87 @@
+h2 {
+  text-align: center;
+}
+.chart {
+  position: relative;
+  width: 500px;
+  height: 250px;
+}
+.hold {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  clip: rect(0px, 200px, 200px, 100px);
+  left: 300px;
+}
+.Pizza {
+  position: absolute;
+  /*  width:100px;
+      height:200px;
+      border-radius:100px 0 0 100px;
+      transform-origin:right center; */
+  width: 200px;
+  height: 200px;
+  clip: rect(0px, 100px, 200px, 0px);
+  border: 1px solid black;
+  border-radius: 100px;
+}
+
+.PizzaContainer {
+  height: 100px;
+  width: 100px;
+  float: left;
+  margin: 30px 0 20px 20px;
+}
+
+#PizzaSliceYellow {
+  transform: rotate(0deg);
+  left: 80px;
+  border-radius: 1px solid black;
+}
+
+#PizzaSliceYellow .Pizza {
+  background-color: #f2cd00;
+  transform: rotate(60deg);
+}
+#PizzaSliceBlack {
+  transform: rotate(60deg);
+  left: 80px;
+}
+#PizzaSliceBlack .Pizza {
+  background-color: black;
+  transform: rotate(60deg);
+}
+#PizzaSliceWhite {
+  transform: rotate(120deg);
+  left: 80px;
+}
+#PizzaSliceWhite .Pizza {
+  background-color: white;
+  transform: rotate(60deg);
+}
+#PizzaSliceBeige {
+  transform: rotate(180deg);
+  left: 80px;
+}
+#PizzaSliceBeige .Pizza {
+  background-color: #f5f5dc;
+  transform: rotate(60deg);
+}
+#PizzaSliceOrange {
+  transform: rotate(240deg);
+  left: 80px;
+}
+#PizzaSliceOrange .Pizza {
+  background-color: #f5a010;
+  transform: rotate(60deg);
+}
+#PizzaSliceLime {
+  transform: rotate(300deg);
+  left: 80px;
+  border-radius: 10px solid black;
+}
+#PizzaSliceLime .Pizza {
+  background-color: #99ff00;
+  transform: rotate(60deg);
+  border-radius: 10px solid;
+}

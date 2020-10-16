@@ -5,6 +5,7 @@ import { ColorFilter } from "./ColorFilter";
 import { MaterialFilter } from "./MaterialFilter";
 import { FilterClearBtn } from "./FilterClearBtn";
 import { FilterOkBtn } from "./FilterOkBtn";
+import { COLOR_NAMES } from "../constants";
 
 export const FilterList = (props) => {
   const {
@@ -15,6 +16,7 @@ export const FilterList = (props) => {
     materialFilter,
     setMaterialFilter,
     setCategoryFilter,
+    categoryFilter,
     listData,
   } = props;
 
@@ -36,7 +38,7 @@ export const FilterList = (props) => {
       </FilterSections>
       <FilterBtn>
         <FilterClearBtn updateItems={updateItems} setColorFilter={setColorFilter} setMaterialFilter={setMaterialFilter}
-setCategoryFilter={setCategoryFilter}/>
+categoryFilter={categoryFilter} setCategoryFilter={setCategoryFilter}/>
         <FilterOkBtn closePopover={closePopover} />
       </FilterBtn>
     </div>
