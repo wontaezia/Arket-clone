@@ -17,6 +17,7 @@ const Nav = () => {
   const openMenu = () => {
     setOption([true, false, false]);
   };
+  console.log('A', option);
   return (
     <>
       <NavBox>
@@ -88,6 +89,7 @@ const Nav = () => {
         onClick={() => {
           setOption([false, false, false]);
         }}
+        option={option}
       />
     </>
   );
@@ -206,10 +208,10 @@ const Button = styled.button`
 `;
 
 const EmptyBox = styled.div`
+  background-color: black;
   position: absolute;
   width: 100%;
-  height: ${({ option }) =>
-    option === [false, false, false] ? '0px' : '960px'};
+  height: ${({ option }) => (option.every((el) => !el) ? '0px' : '960px')};
 `;
 
 const CartBox = styled.div`

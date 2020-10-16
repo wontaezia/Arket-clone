@@ -77,6 +77,7 @@ export default function Login({ option, setOption }) {
         await fetchCart();
         history.push('/');
         setOption([false, false, false]);
+        dispatch(logIn());
       }
     } catch (err) {
       console.log(err);
