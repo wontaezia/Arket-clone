@@ -11,6 +11,7 @@ import { getItems } from '../modules/cart';
 
 export default function Login({ option, setOption }) {
   const dispatch = useDispatch();
+
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -84,10 +85,18 @@ export default function Login({ option, setOption }) {
     }
   };
 
+  const isLogin = () => {
+    if (localStorage.getItem('token')) {
+      dispatch(logIn());
+    }
+  };
+
   const clickLogin = (event) => {
     event.preventDefault();
     fetchLogin();
   };
+
+  isLogin();
 
   return (
     <SignInBox option={option}>
