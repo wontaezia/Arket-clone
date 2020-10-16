@@ -1,27 +1,32 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import {useDispatch, useSelector} from 'react-redux'
-import CartItem from "./components/CartItem";
-import PriceContainer from "./components/PriceContainer";
-import Nav from "../../components/Nav";
-import { API } from "../../config";
-import {getItems, increaseCount, decreaseCount, removeItem} from '../../modules/cart';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import CartItem from './components/CartItem';
+import PriceContainer from './components/PriceContainer';
+import Nav from '../../components/Nav';
+import { API } from '../../config';
+import {
+  getItems,
+  increaseCount,
+  decreaseCount,
+  removeItem,
+} from '../../modules/cart';
 
 export default function Cart() {
   const dispatch = useDispatch();
-  const {items, totalPrice} = useSelector(({cart}) => ({
+  const { items, totalPrice } = useSelector(({ cart }) => ({
     items: cart.items,
-    totalPrice: cart.totalPrice
-  }))
+    totalPrice: cart.totalPrice,
+  }));
 
-  useEffect(() => {ƒ
+  useEffect(() => {
     (async () => {
       const result = await fetch(`${API}/cart`, {
-        headers: { Authorization: localStorage.getItem("token") },
-      })
-      const {data} = await result.json();
-      dispatch(getItems(data))
-    })()
+        headers: { Authorization: localStorage.getItem('token') },
+      });
+      const { data } = await result.json();
+      dispatch(getItems(data));
+    })();
   }, [dispatch]);
 
   const deleteCart = (idx) => {
@@ -35,15 +40,15 @@ export default function Cart() {
   const fetchRemove = async (idx) => {
     try {
       const deleteResult = await fetch(`${API}/cart`, {
-        method: "delete",
-        headers: { Authorization: localStorage.getItem("token") },
+        method: 'delete',
+        headers: { Authorization: localStorage.getItem('token') },
         body: JSON.stringify({
           cart_id: items[idx].cart_id,
         }),
       });
       const { message } = await deleteResult.json();
 
-      if (message === "SUCCESS") {
+      if (message === 'SUCCESS') {
         deleteCart(idx);
       }
     } catch (err) {
@@ -54,8 +59,8 @@ export default function Cart() {
   const fetchCount = async (idx, change, cartList) => {
     try {
       const patchResult = await fetch(`${API}/cart`, {
-        method: "patch",
-        headers: { Authorization: localStorage.getItem("token") },
+        method: 'patch',
+        headers: { Authorization: localStorage.getItem('token') },
         body: JSON.stringify({
           cart_id: items[idx].cart_id,
           count: cartList[idx].count,
@@ -63,11 +68,11 @@ export default function Cart() {
       });
       const { message } = await patchResult.json();
 
-      if (message === "SUCCESS") {
+      if (message === 'SUCCESS') {
         if (change === 1) {
-          dispatch(increaseCount(cartList))
+          dispatch(increaseCount(cartList));
         } else {
-          dispatch(decreaseCount(cartList))
+          dispatch(decreaseCount(cartList));
         }
       }
     } catch (err) {
@@ -77,18 +82,17 @@ export default function Cart() {
 
   const changeCount = (idx, change) => {
     const cartList = [...items];
-    const isDelete = cartList[idx].count === 1 && change === -1
+    const isDelete = cartList[idx].count === 1 && change === -1;
 
-    const changeCartList = 
-    cartList.map((item, index ) => {
-        const isSame = index === idx;
-        if(isSame) {
-          return {...item, count :item.count+change}
-        }
-        if(!isSame) {
-          return item
-        }
-      })
+    const changeCartList = cartList.map((item, index) => {
+      const isSame = index === idx;
+      if (isSame) {
+        return { ...item, count: item.count + change };
+      }
+      if (!isSame) {
+        return item;
+      }
+    });
 
     if (isDelete) fetchRemove(idx);
     if (!isDelete) fetchCount(idx, change, changeCartList);
@@ -101,17 +105,16 @@ export default function Cart() {
         <CartContainer>
           <h2>Shopping bag</h2>
           {items?.map((item, idx) => (
-              <CartItem
-                key={idx}
-                cart={items}
-                idx={idx}
-                item={item}
-                changeCount={changeCount}
-                deleteCart={deleteCart}
-                fetchRemove={fetchRemove}
-              />
-            )
-          )}
+            <CartItem
+              key={idx}
+              cart={items}
+              idx={idx}
+              item={item}
+              changeCount={changeCount}
+              deleteCart={deleteCart}
+              fetchRemove={fetchRemove}
+            />
+          ))}
         </CartContainer>
         <PriceContainer totalPrice={totalPrice} />
       </Section>

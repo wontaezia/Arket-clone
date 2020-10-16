@@ -6,17 +6,19 @@ import { VscAccount } from 'react-icons/vsc';
 import { BsQuestionCircle } from 'react-icons/bs';
 import { BsBag } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import MenuContainer from './MenuContainer';
 
 const Nav = () => {
   const login = useSelector((state) => state.login);
   const { totalCount } = useSelector((state) => state.cart);
+  const history = useHistory();
 
   const [option, setOption] = useState(new Array(3).fill(false));
   const openMenu = () => {
     setOption([true, false, false]);
   };
+  console.log('A', option);
   return (
     <>
       <NavBox>
@@ -42,10 +44,10 @@ const Nav = () => {
               onClick={() => setOption([false, false, !option[2]])}
             />
           </Button>
-          <Button>
+          <Button onClick={() => login && history.push('/cart')}>
             <BsBag></BsBag>
             <CartBox>
-              <CartNum>{totalCount}</CartNum>
+              <CartNum>{totalCount === 0 ? '' : totalCount}</CartNum>
             </CartBox>
           </Button>
         </Icons>
@@ -88,6 +90,7 @@ const Nav = () => {
         onClick={() => {
           setOption([false, false, false]);
         }}
+        option={option}
       />
     </>
   );
@@ -208,8 +211,7 @@ const Button = styled.button`
 const EmptyBox = styled.div`
   position: absolute;
   width: 100%;
-  height: ${({ option }) =>
-    option === [false, false, false] ? '0px' : '960px'};
+  height: ${({ option }) => (option.every((el) => !el) ? '0px' : '960px')};
 `;
 
 const CartBox = styled.div`
@@ -223,7 +225,7 @@ const CartBox = styled.div`
 
 const CartNum = styled.span`
   position: absolute;
-  display: block;
+  display: 'block';
   text-align: center;
   top: 50%;
   left: 50%;
