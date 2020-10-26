@@ -16,11 +16,45 @@
 - 정원태
 
 ## 🧑‍💻 Back-end
-- 이도길
 - 오가빈
+- 이도길
 
 ## 💻 Tech
+프론트엔드
 - React
 - styled-components
 - React Router
 - Git
+백엔드
+- AqueryTool
+- Django
+- Python
+- PyJWT / Bcrypt
+- MySQL
+
+## 📓 팀원 별 작업 현황
+- 프론트엔드
+    - 김진희님
+        - Nav, Footer
+        - 로그인, 소셜로그인(카카오)
+
+    - 손종일님
+        - 상품 상세 페이지
+        - 장바구니
+    - 윤시훈님
+        - 상품 리스트 페이지
+    - 정원태님
+        - 메인 페이지
+        - 리뷰 페이지
+    - 오가빈님
+        - Project setting
+        - Data Modeling
+        - Signup / Signin
+        - Cart
+        - Unit test
+    - 이도길님
+        - Data Modeling
+        - Product list / detail
+        - Social login 
+        - Review
+        - Unit test
