@@ -20,17 +20,17 @@
 - 이도길
 
 ## 💻 Tech
-프론트엔드
-- React
-- styled-components
-- React Router
-- Git
-백엔드
-- AqueryTool
-- Django
-- Python
-- PyJWT / Bcrypt
-- MySQL
+- 프론트엔드
+    - React
+    - styled-components
+    - React Router
+    - Git
+- 백엔드
+    - AqueryTool
+    - Django
+    - Python
+    - PyJWT / Bcrypt
+    - MySQL
 
 ## 📓 팀원 별 작업 현황
 - 프론트엔드
