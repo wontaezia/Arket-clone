@@ -1,6 +1,6 @@
 # Arket Website - Arket In Germany 🇩🇪 
 
-## ✔️ Project
+## ✔️ Project Overview
 - Functional component를 생성.
 - Hooks의 useState, useEffect 함수를 사용하여 컴포넌트의 상태를 관리.
 - styled-component를 사용해 js 파일 안에서 컴포넌트의 스타일을 지정하고, 컴포넌트의 상태를 props로 받아 스타일 적용.
