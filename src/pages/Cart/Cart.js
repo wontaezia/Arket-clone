@@ -14,7 +14,7 @@ export default function Cart() {
     totalPrice: cart.totalPrice
   }))
 
-  useEffect(() => {ƒ
+  useEffect(() => {
     (async () => {
       const result = await fetch(`${API}/cart`, {
         headers: { Authorization: localStorage.getItem("token") },
