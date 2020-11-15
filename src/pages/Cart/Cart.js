@@ -66,6 +66,7 @@ export default function Cart() {
           count: cartList[idx].count,
         }),
       });
+      console.log(patchResult, '오륭');
       const { message } = await patchResult.json();
 
       if (message === 'SUCCESS') {
