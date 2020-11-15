@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-
-
-
 export const FilterClearBtn = ({ updateItems, colorFilter, setColorFilter, materialFilter, setMaterialFilter, categoryFilter, setCategoryFilter}) => {
- 
- const clearBtn = () => {
-  setColorFilter(!colorFilter); setMaterialFilter(!materialFilter); setCategoryFilter(categoryFilter);
- }
+
+  const clearBtn = () => {
+    setColorFilter({1: false, 2: false, 3: false, 4: false}); 
+    setMaterialFilter(!materialFilter);
+    setCategoryFilter(categoryFilter); 
+  } 
+
   return (
     <ClearButton
       onClick={clearBtn}
     >
       {" "}
-      CLEAR
+      CLEAR 
     </ClearButton>
   );
 };

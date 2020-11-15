@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
-import {useDispatch} from 'react-redux'
-import styled from "styled-components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import OrderContainer from "./components/OrderContainer";
-import ProductDetail from "./components/ProductDetail";
-import ProductDescription from "./components/ProductDescription";
-import Nav from "../../components/Nav";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import OrderContainer from './components/OrderContainer';
+import ProductDetail from './components/ProductDetail';
+import ProductDescription from './components/ProductDescription';
+import Nav from '../../components/Nav';
 import { addToCart } from '../../modules/cart';
-import { API } from "../../config";
-import { BsArrowRightShort } from "react-icons/bs";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { API } from '../../config';
+import { BsArrowRightShort } from 'react-icons/bs';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 export default function ItemDetail() {
   const dispatch = useDispatch();
@@ -66,8 +66,8 @@ export default function ItemDetail() {
       });
       const { message } = await addResult.json();
 
-      if (message === "SUCCESS") {
-        dispatch(addToCart(product))
+      if (message === 'SUCCESS') {
+        dispatch(addToCart(product));
         const repeat = setInterval(() => {
           viewStatus.current = !viewStatus.current;
           countTimer.current += 1;
