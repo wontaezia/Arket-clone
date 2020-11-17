@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { HiOutlineX } from "react-icons/hi";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { HiOutlineX } from 'react-icons/hi';
 
 export default function CartItems({
   cart,
@@ -15,9 +15,9 @@ export default function CartItems({
     <CartItem
       key={idx}
       style={{
-        borderRight: idx % 2 === 0 && "1px solid #000",
+        borderRight: idx % 2 === 0 && '1px solid #000',
         borderBottom:
-          (cart.length - 2 === 0 || cart.length - 2 < idx) && "none",
+          (cart.length - 2 === 0 || cart.length - 3 < idx) && 'none',
       }}
       count={item.count}
       onMouseOver={() => onMouseOver()}
@@ -184,11 +184,11 @@ function Xcount() {
   return (
     <HiOutlineX
       style={{
-        verticalAlign: "text-top",
-        marginRight: "5px",
-        width: "22px",
-        height: "22px",
-        color: "#000",
+        verticalAlign: 'text-top',
+        marginRight: '5px',
+        width: '22px',
+        height: '22px',
+        color: '#000',
       }}
     />
   );
@@ -211,14 +211,14 @@ const Plus = styled.div`
   height: 23px;
   cursor: pointer;
   border: ${({ isHover, count }) =>
-    isHover && count !== 20 ? "2px solid black" : "2px solid cdd1d7"};
+    isHover && count !== 20 ? '2px solid black' : '2px solid cdd1d7'};
   color: ${({ isHover, count }) =>
-    isHover && count !== 20 ? "black" : "cdd1d7"};
+    isHover && count !== 20 ? 'black' : 'cdd1d7'};
 
   &:hover {
-    color: ${({ count }) => count !== 20 && "white"};
-    background-color: ${({ count }) => count !== 20 && "#000"};
-    border: ${({ count }) => count !== 20 && "2px solid black"};
+    color: ${({ count }) => count !== 20 && 'white'};
+    background-color: ${({ count }) => count !== 20 && '#000'};
+    border: ${({ count }) => count !== 20 && '2px solid black'};
   }
 `;
 
@@ -238,14 +238,14 @@ const Minus = styled.div`
   width: 23px;
   height: 23px;
   cursor: pointer;
-  border: ${({ isHover }) => isHover && "2px solid black"};
-  color: ${({ isHover }) => (isHover ? "black" : "#cdd1d7")};
+  border: ${({ isHover }) => isHover && '2px solid black'};
+  color: ${({ isHover }) => (isHover ? 'black' : '#cdd1d7')};
 
   &:hover {
-    color: ${({ count }) => (count === 1 ? "red" : "white")};
-    background-color: ${({ count }) => (count === 1 ? "white" : "#000")};
+    color: ${({ count }) => (count === 1 ? 'red' : 'white')};
+    background-color: ${({ count }) => (count === 1 ? 'white' : '#000')};
     border: ${({ count }) =>
-      count === 1 ? "2px solid red" : "2px solid black"};
+      count === 1 ? '2px solid red' : '2px solid black'};
   }
 `;
 
