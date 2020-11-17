@@ -59,14 +59,14 @@ export default function Cart() {
   const fetchCount = async (idx, change, cartList) => {
     try {
       const patchResult = await fetch(`${API}/cart`, {
-        method: 'patch',
+        method: 'PATCH',
         headers: { Authorization: localStorage.getItem('token') },
         body: JSON.stringify({
           cart_id: items[idx].cart_id,
           count: cartList[idx].count,
         }),
       });
-      console.log(patchResult, '오륭');
+
       const { message } = await patchResult.json();
 
       if (message === 'SUCCESS') {
