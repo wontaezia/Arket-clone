@@ -26,22 +26,26 @@ export default function ItemDetail() {
   const viewStatus = useRef(false);
   const { productId } = useParams();
 
+  // 품절 상태 확인
   const choiceStatus = (soldOut) => {
     setIsSoldOut(soldOut);
   };
 
+  // 사이즈 선택시
   const isSizeChoice = (size, soldOut, ProductSize) => {
+    // 선택된 사이즈 (클릭된 상태 관리)
     setActiveSize(size);
+    // 선택된 사이즈, size id 상태 관리
     setSize(
       {
-        Size: size,
-        SoldOut: soldOut,
         product_size_id: ProductSize,
       },
+      // 품절 상태 확인
       choiceStatus(soldOut)
     );
   };
 
+  // item detail에 관한 정보를 GET
   const fetchItemDetail = async (productId) => {
     const result = await fetch(`${API}/products/${productId}`);
     const { data } = await result.json();
@@ -49,10 +53,12 @@ export default function ItemDetail() {
     setProduct(data);
   };
 
+  // URL 변경시
   useEffect(() => {
     fetchItemDetail(productId);
   }, [productId]);
 
+  // 장바구니 추가
   const fetchAdd = async () => {
     try {
       const addResult = await fetch(`${API}/cart`, {

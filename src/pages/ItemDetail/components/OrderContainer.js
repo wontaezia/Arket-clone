@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import {useSelector} from 'react-redux'
+import React from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 export default function ItemDetail({
   product,
@@ -10,9 +10,11 @@ export default function ItemDetail({
   activeSize,
   isSoldOut,
 }) {
-  const {login} = useSelector((state) => ({
-    login: state.login
-  }))
+  // 로그인 상태를 확인
+  const { login } = useSelector((state) => ({
+    login: state.login,
+  }));
+
   return (
     <div>
       <ProductMaterials>
@@ -34,7 +36,7 @@ export default function ItemDetail({
         </SizeGuideBox>
         <SizeInfoBox>
           {product?.ProductSize.map((item, i) => {
-            return item.SoldOut === "true"? (
+            return item.SoldOut === 'true' ? (
               <SizeSoldOut
                 key={i}
                 onClick={() =>
@@ -49,10 +51,9 @@ export default function ItemDetail({
                 onClick={() =>
                   isSizeChoice(item.Size, item.SoldOut, item.ProductSize)
                 }
-                size={size}
                 style={{
-                  backgroundColor: activeSize === item.Size ? "black" : "white",
-                  color: activeSize === item.Size ? "white" : "black",
+                  backgroundColor: activeSize === item.Size ? 'black' : 'white',
+                  color: activeSize === item.Size ? 'white' : 'black',
                 }}
               >
                 <span>{item.Size}</span>
@@ -60,7 +61,7 @@ export default function ItemDetail({
             );
           })}
         </SizeInfoBox>
-        {!login || isSoldOut === "true" ? (
+        {!login || isSoldOut === 'true' ? (
           <DisalbedBtnBox>
             <span>ADD TO BAG</span>
           </DisalbedBtnBox>
@@ -93,7 +94,7 @@ const ProductInfo = styled.div`
 
 const ProducTitle = styled.div`
   display: inline-block;
-  
+
   h1 {
     max-width: 224px;
     font-size: 20px;
@@ -189,7 +190,7 @@ const ShippingInfo = styled.div`
   text-align: center;
   padding-bottom: 15px;
   border-bottom: 1px solid #000;
-  
+
   span {
     font-size: 12px;
   }

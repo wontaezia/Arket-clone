@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HiOutlineX } from 'react-icons/hi';
 
@@ -9,15 +10,20 @@ export default function CartItems({
   changeCount,
   fetchRemove,
 }) {
+  // 상품의 호버 상태
   const [isHover, setIsHover] = useState(false);
   const onMouseOver = () => setIsHover(!isHover);
+
   return (
     <CartItem
       key={idx}
       style={{
         borderRight: idx % 2 === 0 && '1px solid #000',
         borderBottom:
-          (cart.length - 2 === 0 || cart.length - 3 < idx) && 'none',
+          (cart.length - 2 === 0 ||
+            (cart.length % 2 === 0 && cart.length - 3 < idx) ||
+            (cart.length % 2 !== 0 && cart.length - 2 < idx)) &&
+          'none',
       }}
       count={item.count}
       onMouseOver={() => onMouseOver()}
@@ -29,7 +35,9 @@ export default function CartItems({
             <span>X</span>
           </RemoveBox>
         </span>
-        <CartImg src={item.main_image} />
+        <Link to={`/item-detail/${item.id}`}>
+          <CartImg src={item.main_image} />
+        </Link>
       </CartImgBox>
       <CountBox>
         <div>

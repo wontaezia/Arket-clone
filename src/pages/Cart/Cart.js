@@ -29,6 +29,7 @@ export default function Cart() {
     })();
   }, [dispatch]);
 
+  // 스토어의 장바구니 상품 삭제
   const deleteCart = (idx) => {
     const cartList = [...items];
     const updateItem = cartList.filter(
@@ -37,6 +38,7 @@ export default function Cart() {
     dispatch(removeItem(updateItem));
   };
 
+  // 서버의 장바구니 상품 삭제
   const fetchRemove = async (idx) => {
     try {
       const deleteResult = await fetch(`${API}/cart`, {
@@ -56,6 +58,7 @@ export default function Cart() {
     }
   };
 
+  // 서버의 장바구니 카운트 변경
   const fetchCount = async (idx, change, cartList) => {
     try {
       const patchResult = await fetch(`${API}/cart`, {
@@ -81,6 +84,7 @@ export default function Cart() {
     }
   };
 
+  // 장바구니 상태 변경
   const changeCount = (idx, change) => {
     const cartList = [...items];
     const isDelete = cartList[idx].count === 1 && change === -1;

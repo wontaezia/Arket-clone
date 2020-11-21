@@ -18,7 +18,6 @@ const Nav = () => {
   const openMenu = () => {
     setOption([true, false, false]);
   };
-  console.log('A', option);
   return (
     <>
       <NavBox>
