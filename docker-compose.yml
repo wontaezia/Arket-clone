@@ -1,0 +1,17 @@
+# docker verison
+version: "3.7"
+
+# 실행하려는 컨테이너들
+services:
+  sample:
+    container_name: react-dockerize
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "8002:80"
+    environment:
+      - NODE_ENV=development
