@@ -1,5 +1,5 @@
-export const API = 'http://13.124.73.246:8001';
-export const baekAPI = 'http://13.124.73.246:8001';
+export const API = 'http://54.180.133.194:8001';
+export const baekAPI = 'http://54.180.133.194:8001';
 export const reviewsTestToken =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNvanVAbmF2ZXIuY29tIn0.oXcsGDpGHWkSYpLNOxQA_bU4lRJZukLqa8y_ffX9YIE';
 export const accessKeyId = 'AKIATJ3377PSKQB5HXK5';
