@@ -104,8 +104,6 @@ export default function Login({ option, setOption }) {
     fetchLogin();
   };
 
-  isLogin();
-
   return !login ? (
     <SignInBox option={option}>
       <SignInContent>
