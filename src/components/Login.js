@@ -169,11 +169,11 @@ export default function Login({ option, setOption }) {
         </>
       </SignInContent>
     </SignInBox>
-  ):(<SignInBox option={option}>
-      <LogoutBox onClick={handleLogOut}>
-        Logout
-      </LogoutBox>
-    </SignInBox>);
+  ) : (
+    <SignInBox option={option}>
+      <LogoutBox onClick={handleLogOut}>Logout</LogoutBox>
+    </SignInBox>
+  );
 }
 const LogoutBox = styled.div`
   width: 100%;
