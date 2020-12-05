@@ -15,6 +15,14 @@ export default function ItemDetail({
     login: state.login,
   }));
 
+  const sizeValidPopup = () => {
+    alert('품절 상태를 확인해주세요');
+  };
+
+  const loginValidPopup = () => {
+    alert('로그인 후에 이용해주세요.');
+  };
+
   return (
     <div>
       <ProductMaterials>
@@ -62,11 +70,11 @@ export default function ItemDetail({
           })}
         </SizeInfoBox>
         {!login || isSoldOut === 'true' ? (
-          <DisalbedBtnBox>
+          <DisalbedBtnBox onClick={loginValidPopup}>
             <span>ADD TO BAG</span>
           </DisalbedBtnBox>
         ) : (
-          <AddBtnBox onClick={size.none !== null && addToBag}>
+          <AddBtnBox onClick={size.none !== sizeValidPopup && addToBag}>
             <span>ADD TO BAG</span>
           </AddBtnBox>
         )}
