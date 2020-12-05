@@ -70,11 +70,17 @@ export default function ItemDetail({
           })}
         </SizeInfoBox>
         {!login || isSoldOut === 'true' ? (
-          <DisalbedBtnBox onClick={loginValidPopup}>
-            <span>ADD TO BAG</span>
-          </DisalbedBtnBox>
+          !login ? (
+            <DisalbedBtnBox onClick={loginValidPopup}>
+              <span>ADD TO BAG</span>
+            </DisalbedBtnBox>
+          ) : (
+            <DisalbedBtnBox onClick={sizeValidPopup}>
+              <span>ADD TO BAG</span>
+            </DisalbedBtnBox>
+          )
         ) : (
-          <AddBtnBox onClick={size.none !== sizeValidPopup && addToBag}>
+          <AddBtnBox onClick={size.none !== null && addToBag}>
             <span>ADD TO BAG</span>
           </AddBtnBox>
         )}
