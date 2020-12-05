@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { BsCheckBox } from 'react-icons/bs';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import KaKaoLogin from 'react-kakao-login';
 import { API, kakaoKey } from '../config';
 import { useDispatch } from 'react-redux';
-import { logIn } from '../modules/login';
+import { logIn, logOut } from '../modules/login';
 import { getItems } from '../modules/cart';
 
 export default function Login({ option, setOption }) {
   const dispatch = useDispatch();
 
+  const login = useSelector((state) => state.login);
+
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
   });
+
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    dispatch(logOut());
+  };
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -98,7 +106,7 @@ export default function Login({ option, setOption }) {
 
   isLogin();
 
-  return (
+  return !login ? (
     <SignInBox option={option}>
       <SignInContent>
         <SignInTab>
@@ -163,8 +171,22 @@ export default function Login({ option, setOption }) {
         </>
       </SignInContent>
     </SignInBox>
+  ) : (
+    <SignInBox option={option}>
+      <LogoutBox onClick={handleLogOut}>logout</LogoutBox>
+    </SignInBox>
   );
 }
+const LogoutBox = styled.div`
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;

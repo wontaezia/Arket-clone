@@ -80,7 +80,7 @@ export default function ItemDetail({
             </DisalbedBtnBox>
           )
         ) : (
-          <AddBtnBox onClick={size.none !== null ? addToBag:sizeValidPopup}>
+          <AddBtnBox onClick={size.none !== null && addToBag}>
             <span>ADD TO BAG</span>
           </AddBtnBox>
         )}

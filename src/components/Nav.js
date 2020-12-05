@@ -51,7 +51,8 @@ const Nav = () => {
           </Button>
         </Icons>
       </NavBox>
-      {!login && <Login option={option} setOption={setOption} />}
+      {/* {!login && <Login option={option} setOption={setOption} />} */}
+      {<Login option={option} setOption={setOption} />}
       <QuestionBox option={option}>
         <AboutWrap>
           <AboutBox>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from './components/CartItem';
 import PriceContainer from './components/PriceContainer';
@@ -18,6 +19,19 @@ export default function Cart() {
     items: cart.items,
     totalPrice: cart.totalPrice,
   }));
+
+  const history = useHistory();
+
+  const { login } = useSelector((state) => ({
+    login: state.login,
+  }));
+
+  useEffect(() => {
+    if (!login) {
+      alert('로그인 후에 이용해주세요.');
+      history.push('/');
+    }
+  }, [history, login]);
 
   useEffect(() => {
     (async () => {
