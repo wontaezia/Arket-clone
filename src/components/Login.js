@@ -104,9 +104,7 @@ export default function Login({ option, setOption }) {
     fetchLogin();
   };
 
-  isLogin();
-
-  return !login ? (
+  return (
     <SignInBox option={option}>
       <SignInContent>
         <SignInTab>
@@ -170,10 +168,6 @@ export default function Login({ option, setOption }) {
           </LoginForm>
         </>
       </SignInContent>
-    </SignInBox>
-  ) : (
-    <SignInBox option={option}>
-      <LogoutBox onClick={handleLogOut}>logout</LogoutBox>
     </SignInBox>
   );
 }
